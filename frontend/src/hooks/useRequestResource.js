@@ -32,7 +32,6 @@ const useRequestResource = ({endpoint}) => {
     const getResource = useCallback((id)=>{
         axios.get(`/api/${endpoint}/${id}/`)
             .then((res)=>{
-                console.log(res)
                 const {data} = res
                 setResource(data)
             }).catch((err)=>{
@@ -51,13 +50,28 @@ const useRequestResource = ({endpoint}) => {
             })
     }, [endpoint])
 
+    const deleteResource = useCallback((id)=>{
+        axios.delete(`/api/${endpoint}/${id}/`)
+            .then(()=>{
+                const newResourceList = {
+                    results:resourceList.results.filter((r)=>{
+                        return r.id !== id
+                    })
+                }
+                setResourceList(newResourceList);
+            }).catch((err)=>{
+                console.error(err)
+            })
+    }, [endpoint,resourceList])
+
     return {
         resourceList,
         getResourceList,
         addResource,
         resource,
         getResource,
-        updateResource
+        updateResource,
+        deleteResource
     }
 }
 

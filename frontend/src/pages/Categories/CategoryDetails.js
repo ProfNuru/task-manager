@@ -4,7 +4,9 @@ import {Grid,TextField,Typography,
         Paper,Button,Box} from "@mui/material";
 import * as yup from "yup";
 import {Link, useNavigate,useParams} from "react-router-dom";
+
 import useRequestResource from 'src/hooks/useRequestResource';
+import ColorPicker from 'src/components/ColorPicker';
 
 const CategoryDetails = () => {
     const {addResource, resource, getResource, updateResource} = useRequestResource({endpoint:"categories"})
@@ -26,19 +28,23 @@ const CategoryDetails = () => {
         if(resource){
             setInitialValues({
                 name:resource.name,
-                color:resource.color
+                color:`#${resource.color}`
             })
         }
     },[resource])
 
     const handleSubmit = values=>{
+        const formattedValues = {
+            name:values.name,
+            color:values.color.substring(1)
+        }
         if(id){
-            updateResource(id,values,()=>{
+            updateResource(id,formattedValues,()=>{
                 navigate("/categories");
             })
             return;
         }
-        addResource(values,()=>{
+        addResource(formattedValues,()=>{
             navigate("/categories")
         })
     }
@@ -71,13 +77,15 @@ const CategoryDetails = () => {
                         </Grid>
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
-                                <TextField fullWidth
+                                <ColorPicker
                                     id="color"
-                                    label="Color"
-                                    {...formik.getFieldProps("color")}
+                                    value={formik.values.color}
+                                    onChange={(color)=>{
+                                        formik.setFieldValue("color",color.hex)
+                                    }}
                                     error={formik.touched.color && Boolean(formik.errors.color)}
-                                    helperText={formik.touched.color && formik.errors.name}
-                                    />
+                                    helperText={formik.touched.color && formik.errors.color}
+                                />
                             </Grid>
                         </Grid>
                         <Grid item>
