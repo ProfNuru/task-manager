@@ -9,7 +9,7 @@ import useRequestResource from 'src/hooks/useRequestResource';
 import ColorPicker from 'src/components/ColorPicker';
 
 const CategoryDetails = () => {
-    const {addResource, resource, getResource, updateResource} = useRequestResource({endpoint:"categories"})
+    const {addResource, resource, getResource, updateResource} = useRequestResource({endpoint:"categories",resourceLabel:"Category"})
     const [initialValues,setInitialValues] = useState({
                                                 name:"",
                                                 color:""

@@ -26,7 +26,7 @@ import ColorBox from "src/components/ColorBox";
 // ]
 
 const Categories = () => {
-    const {getResourceList,resourceList,deleteResource} = useRequestResource({endpoint:"categories"})
+    const {getResourceList,resourceList,deleteResource} = useRequestResource({endpoint:"categories",resourceLabel:"Category"})
     const [open, setOpen] = useState(false);
     const [idToDelete, setIdToDelete] = useState(null);
 
