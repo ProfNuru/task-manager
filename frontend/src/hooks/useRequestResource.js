@@ -8,7 +8,7 @@ const useRequestResource = ({endpoint,resourceLabel}) => {
                                             })
     const [resource,setResource] = useState(null)
     const {enqueueSnackbar} = useSnackbar();
-
+    
     const getResourceList = useCallback(()=>{
         axios.get(`/api/${endpoint}/`)
             .then((res)=>{
@@ -31,7 +31,6 @@ const useRequestResource = ({endpoint,resourceLabel}) => {
                 console.error(err)
             })
     }, [endpoint,enqueueSnackbar,resourceLabel])
-
 
     const getResource = useCallback((id)=>{
         axios.get(`/api/${endpoint}/${id}/`)

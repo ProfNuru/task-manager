@@ -26,7 +26,7 @@ import ColorBox from "src/components/ColorBox";
 // ]
 
 const Categories = () => {
-    const {getResourceList,resourceList,deleteResource} = useRequestResource({endpoint:"categories",resourceLabel:"Category"})
+    const {getResourceList,resourceList,deleteResource} = useRequestResource({endpoint:"categories", resourceLabel:"Category"})
     const [open, setOpen] = useState(false);
     const [idToDelete, setIdToDelete] = useState(null);
 
@@ -74,7 +74,7 @@ const Categories = () => {
                 color="primary"
                 to="/categories/create">
                     Create Category
-                </Button>
+            </Button>
         </Box>
         <TableContainer component={Paper}>
             <Table sx={{minWidth:360}} size="small">
